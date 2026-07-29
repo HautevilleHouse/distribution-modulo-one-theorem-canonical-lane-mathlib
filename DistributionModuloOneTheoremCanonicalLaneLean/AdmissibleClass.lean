@@ -1,16 +1,16 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.TheoremStatement
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
 structure AdmissibleClass where
-  object : DistributionModOneAdmittedObject
+  object : DistributionAdmittedObject
   endpointSatisfied : Prop
   remainderRecorded : Prop
   gateWitness : endpointSatisfied ∨ remainderRecorded
 
 def admittedClosure (A : AdmissibleClass) : Prop :=
-  DistributionModOneWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
+  DistributionWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse

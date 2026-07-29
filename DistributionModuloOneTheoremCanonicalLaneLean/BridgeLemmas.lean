@@ -4,7 +4,7 @@ namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
 def bridgeClosed (A : AdmissibleClass) : Prop :=
-  DistributionModOneWitnessClosed A.object
+  DistributionWitnessClosed A.object
 
 theorem bridge_from_admissible_class (A : AdmissibleClass) :
     bridgeClosed A := by
