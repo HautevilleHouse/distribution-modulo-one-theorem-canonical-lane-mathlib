@@ -1,26 +1,26 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.EquidistributionPackage
-
-/-!
-# Weyl Criterion Package
--/
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
-structure WeylCriterionPackage {E : EquidistributionPackage} where
-  exponentialSums : Prop
-  frequencyCharacter : Prop
-  limitBehavior : Prop
-  weylSumZero : Prop
+structure WeylCriterionPackage where
+  exponentialSums : (ℕ → ℂ)
+  limitCondition : Prop
+  equidistributionEquivalent : Prop
+  weylEquidistributionTheorem : Prop
 
-def WeylCriterionClosed {E : EquidistributionPackage} (W : WeylCriterionPackage E) : Prop :=
-  W.exponentialSums ∧ W.frequencyCharacter ∧ W.limitBehavior ∧ W.weylSumZero
+structure WeylCriterionEvidence (W : WeylCriterionPackage) where
+  limitConditionClosed : W.limitCondition
+  equidistributionEquivalentClosed : W.equidistributionEquivalent
+  weylEquidistributionTheoremClosed : W.weylEquidistributionTheorem
 
-theorem weyl_criterion_closed_from_evidence {E : EquidistributionPackage}
-    (W : WeylCriterionPackage E) (hExp : W.exponentialSums) (hFreq : W.frequencyCharacter)
-    (hLimit : W.limitBehavior) (hZero : W.weylSumZero) :
-    WeylCriterionClosed W := by
-  exact And.intro hExp (And.intro hFreq (And.intro hLimit hZero))
+def WeylCriterionClosed (W : WeylCriterionPackage) : Prop :=
+  W.limitCondition ∧ W.equidistributionEquivalent ∧ W.weylEquidistributionTheorem
+
+theorem weyl_criterion_closed_from_evidence (W : WeylCriterionPackage)
+    (E : WeylCriterionEvidence W) : WeylCriterionClosed W := by
+  exact And.intro E.limitConditionClosed
+    (And.intro E.equidistributionEquivalentClosed E.weylEquidistributionTheoremClosed)
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse

@@ -1,10 +1,10 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.Projection
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
 def bridgeClosed (A : AdmissibleClass) : Prop :=
-  DistributionWitnessClosed A.object
+  A.object.equidistributionResult
 
 theorem bridge_from_admissible_class (A : AdmissibleClass) :
     bridgeClosed A := by

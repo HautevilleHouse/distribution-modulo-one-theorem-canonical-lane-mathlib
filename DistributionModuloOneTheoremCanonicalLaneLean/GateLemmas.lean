@@ -1,4 +1,4 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.BridgeLemmas
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean

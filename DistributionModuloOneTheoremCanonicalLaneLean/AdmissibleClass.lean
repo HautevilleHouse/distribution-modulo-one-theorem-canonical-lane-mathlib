@@ -1,7 +1,13 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.MathlibObjects
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
+
+structure DistributionAdmittedObject where
+  sequence : (ℕ → ℝ)
+  fractionalPartLaw : Prop
+  equidistributionResult : Prop
+  conclusion : equidistributionResult
 
 structure AdmissibleClass where
   object : DistributionAdmittedObject
@@ -10,7 +16,7 @@ structure AdmissibleClass where
   gateWitness : endpointSatisfied ∨ remainderRecorded
 
 def admittedClosure (A : AdmissibleClass) : Prop :=
-  DistributionWitnessClosed A.object ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
+  bridgeClosed A ∧ (A.endpointSatisfied ∨ A.remainderRecorded)
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse

@@ -1,15 +1,29 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.KroneckerWeil
+import canonicalLaneMathlib.AdmissibleClass
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
-structure EquidistributionCriteriaPackage (O : DistributionAdmittedObject) where
-  weylSumBounds : Prop
-  discrepancyBounds : Prop
-  koksmaHlawkaInequality : Prop
+structure EquidistributionPackage where
+  weylCriterionApplied : Prop
+  exponentialSumVanishes : Prop
+  densityInUnitInterval : Prop
+  uniformDistribution : Prop
 
-def EquidistributionCriteriaClosed (O : DistributionAdmittedObject) (E : EquidistributionCriteriaPackage O) : Prop :=
-  E.weylSumBounds ∧ E.discrepancyBounds ∧ E.koksmaHlawkaInequality
+structure EquidistributionEvidence (P : EquidistributionPackage) where
+  weylCriterionAppliedClosed : P.weylCriterionApplied
+  exponentialSumVanishesClosed : P.exponentialSumVanishes
+  densityInUnitIntervalClosed : P.densityInUnitInterval
+  uniformDistributionClosed : P.uniformDistribution
+
+def EquidistributionClosed (P : EquidistributionPackage) : Prop :=
+  P.weylCriterionApplied ∧ P.exponentialSumVanishes ∧
+  P.densityInUnitInterval ∧ P.uniformDistribution
+
+theorem equidistribution_closed_from_evidence (P : EquidistributionPackage)
+    (E : EquidistributionEvidence P) : EquidistributionClosed P := by
+  exact And.intro E.weylCriterionAppliedClosed
+    (And.intro E.exponentialSumVanishesClosed
+      (And.intro E.densityInUnitIntervalClosed E.uniformDistributionClosed))
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse
