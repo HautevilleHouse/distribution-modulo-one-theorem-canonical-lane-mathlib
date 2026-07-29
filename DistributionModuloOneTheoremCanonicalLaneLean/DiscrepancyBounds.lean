@@ -1,27 +1,27 @@
-import canonicalLaneMathlib.AdmissibleClass
+import DistributionModuloOneTheoremCanonicalLaneLean.KroneckerApproximation
+
+/-!
+# Discrepancy Bounds Package
+-/
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
-structure DiscrepancyBoundsPackage where
-  erdosTuránInequality : Prop
-  starDiscrepancyBound : Prop
-  extremeDiscrepancyBound : Prop
-  discrepancyEquivalence : Prop
+structure DiscrepancyBoundsPackage {E : EquidistributionPackage} where
+  starDiscrepancy : ℕ → ℝ
+  lowDiscrepancyBound : Prop
+  koksmaInequality : Prop
+  effectiveRate : Prop
 
-structure DiscrepancyBoundsEvidence (D : DiscrepancyBoundsPackage) where
-  erdosTuránInequalityClosed : D.erdosTuránInequality
-  starDiscrepancyBoundClosed : D.starDiscrepancyBound
-  extremeDiscrepancyBoundClosed : D.extremeDiscrepancyBound
-  discrepancyEquivalenceClosed : D.discrepancyEquivalence
+def DiscrepancyBoundsClosed {E : EquidistributionPackage}
+    (D : DiscrepancyBoundsPackage E) : Prop :=
+  D.lowDiscrepancyBound ∧ D.koksmaInequality ∧ D.effectiveRate
 
-def DiscrepancyBoundsClosed (D : DiscrepancyBoundsPackage) : Prop :=
-  D.erdosTuránInequality ∧ D.starDiscrepancyBound ∧ D.extremeDiscrepancyBound ∧ D.discrepancyEquivalence
-
-theorem discrepancy_bounds_closed_from_evidence (D : DiscrepancyBoundsPackage)
-    (Ev : DiscrepancyBoundsEvidence D) : DiscrepancyBoundsClosed D := by
-  exact And.intro Ev.erdosTuránInequalityClosed (And.intro Ev.starDiscrepancyBoundClosed
-    (And.intro Ev.extremeDiscrepancyBoundClosed Ev.discrepancyEquivalenceClosed))
+theorem discrepancy_bounds_closed_from_evidence {E : EquidistributionPackage}
+    (D : DiscrepancyBoundsPackage E) (hLow : D.lowDiscrepancyBound)
+    (hKok : D.koksmaInequality) (hEff : D.effectiveRate) :
+    DiscrepancyBoundsClosed D := by
+  exact And.intro hLow (And.intro hKok hEff)
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse

@@ -1,4 +1,4 @@
-import canonicalLaneMathlib.AdmissibleClass
+import DistributionModuloOneTheoremCanonicalLaneLean.MathlibObjects
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean

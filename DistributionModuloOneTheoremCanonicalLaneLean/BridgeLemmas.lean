@@ -1,4 +1,4 @@
-import DistributionModuloOneTheoremCanonicalLaneLean.AdmissibleClass
+import DistributionModuloOneTheoremCanonicalLaneLean.Projection
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean

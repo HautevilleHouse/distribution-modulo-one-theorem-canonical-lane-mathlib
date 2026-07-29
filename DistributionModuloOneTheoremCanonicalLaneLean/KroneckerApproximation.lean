@@ -1,25 +1,28 @@
-import canonicalLaneMathlib.AdmissibleClass
+import DistributionModuloOneTheoremCanonicalLaneLean.WeylCriterion
+
+/-!
+# Kronecker Approximation Package
+-/
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
 
-structure KroneckerApproximationPackage where
-  kroneckerDensity : Prop
+structure KroneckerApproximationPackage {E : EquidistributionPackage} where
+  irrationalMultiples : Prop
+  dirichletApproximation : Prop
   simultaneousApproximation : Prop
-  torusWindingDense : Prop
+  moduloOneDensity : Prop
 
-structure KroneckerApproximationEvidence (K : KroneckerApproximationPackage) where
-  kroneckerDensityClosed : K.kroneckerDensity
-  simultaneousApproximationClosed : K.simultaneousApproximation
-  torusWindingDenseClosed : K.torusWindingDense
+def KroneckerApproximationClosed {E : EquidistributionPackage}
+    (K : KroneckerApproximationPackage E) : Prop :=
+  K.irrationalMultiples ∧ K.dirichletApproximation ∧
+  K.simultaneousApproximation ∧ K.moduloOneDensity
 
-def KroneckerApproximationClosed (K : KroneckerApproximationPackage) : Prop :=
-  K.kroneckerDensity ∧ K.simultaneousApproximation ∧ K.torusWindingDense
-
-theorem kronecker_approximation_closed_from_evidence (K : KroneckerApproximationPackage)
-    (Ev : KroneckerApproximationEvidence K) : KroneckerApproximationClosed K := by
-  exact And.intro Ev.kroneckerDensityClosed (And.intro Ev.simultaneousApproximationClosed
-    Ev.torusWindingDenseClosed)
+theorem kronecker_approximation_closed_from_evidence {E : EquidistributionPackage}
+    (K : KroneckerApproximationPackage E) (hIrr : K.irrationalMultiples)
+    (hDir : K.dirichletApproximation) (hSim : K.simultaneousApproximation)
+    (hDen : K.moduloOneDensity) : KroneckerApproximationClosed K := by
+  exact And.intro hIrr (And.intro hDir (And.intro hSim hDen))
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse

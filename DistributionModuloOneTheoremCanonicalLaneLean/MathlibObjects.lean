@@ -1,5 +1,5 @@
-import canonicalLaneMathlib.AdmissibleClass
-import Mathlib.Data.Real.Basic
+import DistributionModuloOneTheoremCanonicalLaneLean.ClassicalHardyLittlewood
+import Mathlib.Topology.Basic
 
 namespace HautevilleHouse
 namespace DistributionModuloOneTheoremCanonicalLaneLean
@@ -11,15 +11,16 @@ structure DistributionSpace where
 structure DistributionAdmittedObject where
   space : DistributionSpace
   sequence : ℕ → ℝ
-  uniformDistributionModOne : Prop
-  fractionalPartDense : Prop
-  conclusion : fractionalPartDense
+  moduloOneSequence : ℕ → ℝ
+  uniformlyDistributedModOne : Prop
+  weylCriterionPassed : Prop
+  conclusion : uniformlyDistributedModOne ∧ weylCriterionPassed
 
 structure DistributionEndgameState where
   object : DistributionAdmittedObject
 
 def DistributionWitnessClosed (O : DistributionAdmittedObject) : Prop :=
-  O.fractionalPartDense
+  O.uniformlyDistributedModOne ∧ O.weylCriterionPassed
 
 end DistributionModuloOneTheoremCanonicalLaneLean
 end HautevilleHouse
